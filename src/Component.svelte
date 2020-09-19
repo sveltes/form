@@ -23,8 +23,8 @@
               setTimeout(resolve, 1000);
             });
             return false;
-          })
-        // password: yup.string().required()
+          }),
+        password: yup.string().min(3).required()
       }),
     // .noUnknown(false),
     onSubmit(values) {
@@ -42,18 +42,22 @@
 <Form
   {form}
   options={{}}
-  on:submit={(e) => {
+  on:submit｜preventDefault={(e) => {
     e.preventDefault();
     handleSubmit();
   }}>
   <Field key="username" let:key let:error>
-    <input type="text" bind:value={fields[key]} on:change={changeHandle(key)} />
+    <input
+      type="text"
+      bind:value={form.fields[key]}
+      on:change={changeHandle(key)} />
     <div>
       {#if error}{error.message}{/if}
     </div>
   </Field>
-  <Field key="password" let:key options={{ autoValidate: true }}>
+  <Field key="password" let:key let:error options={{ autoValidate: true }}>
     <input type="text" bind:value={fields[key]} />
+    <span>{#if error}{error.message}{/if}</span>
   </Field>
   <!-- <div>
 		<Field id="profile.sex">

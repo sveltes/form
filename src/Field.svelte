@@ -42,8 +42,14 @@
     if (!fieldSchema) {
       return;
     }
+    // https://github.com/jquense/yup#mixedvalidatevalue-any-options-object-promiseany-validationerror
     fieldSchema
-      .validate(val)
+      .validate(val, {
+        // strict: false,
+        abortEarly: true,
+        stripUnknown: false,
+        recursive: false
+      })
       .then(function () {
         error = null;
       })
