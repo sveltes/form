@@ -43,7 +43,6 @@
   {form}
   options={{}}
   on:submit｜preventDefault={(e) => {
-    e.preventDefault();
     handleSubmit();
   }}>
   <Field key="username" let:key let:error>
